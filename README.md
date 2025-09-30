@@ -207,5 +207,7 @@ A disponibilidade dos modelos do Gemini pode variar. Incluímos um script para v
 * **Frontend (Vercel):** O conteúdo da pasta `frontend` pode ser implantado como um "Static Site" na Vercel.
 * **Backend (Render):** O backend na pasta `backend` é containerizado e pode ser implantado como um "Web Service" na plataforma Render.
 
+* **OBS:** Como está sendo utilizado os serviços gratuitos, nas primeiras requisições do frontend para o backend não devem funcionar devido ao fato do Render suspender os serviços que não receberam alguma interação nos ultimos 15 minutos. 
+
 ---
 
