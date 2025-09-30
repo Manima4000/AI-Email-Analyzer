@@ -76,8 +76,8 @@ Siga as instruções abaixo para ter o projeto rodando na sua máquina em segund
 
 1.  **Clone o repositório:**
     ```bash
-    git clone [https://github.com/seu-usuario/seu-repositorio.git](https://github.com/seu-usuario/seu-repositorio.git)
-    cd seu-repositorio
+    git clone [https://github.com/Manima4000/AI-Email-Analyzer.git](https://github.com/Manima4000/AI-Email-Analyzer.git)
+    cd AI-Email-Analyzer
     ```
 
 2.  **Configure suas variáveis de ambiente:**
@@ -180,11 +180,3 @@ A disponibilidade dos modelos do Gemini pode variar. Incluímos um script para v
 * [ ] CI/CD com GitHub Actions para rodar os testes automaticamente.
 
 ---
-
-## 👤 Contato
-
-**[Seu Nome]**
-
-* **LinkedIn:** `[Link para o seu LinkedIn]`
-* **GitHub:** `[Link para o seu GitHub]`
-* **E-mail:** `[Seu E-mail]`
