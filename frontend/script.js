@@ -101,10 +101,10 @@ function displayResults(data) {
     resultCategory.className = ''; 
     resultCategory.classList.add('badge');
 
-    if (category.includes('produtivo')) {
-        resultCategory.classList.add('badge--productive');
-    } else if (category.includes('improdutivo')) {
-        resultCategory.classList.add('badge--unproductive');
+    if (category.includes('improdutivo')) {
+        resultCategory.classList.add('badge--unproductive')
+    } else if (category.includes('produtivo')) {
+        resultCategory.classList.add('badge--productive');;
     } else if (category.includes('neutro')) {
         resultCategory.classList.add('badge--neutral');
     } else { 
