@@ -1,5 +1,5 @@
 import pytest
-from unittest.mock import MagicMock # Usaremos MagicMock para criar nosso dublê
+from unittest.mock import MagicMock 
 
 from app.services.text_parser import extract_text_from_file
 

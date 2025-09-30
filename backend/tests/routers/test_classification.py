@@ -40,12 +40,7 @@ def test_classify_email_without_data_fails():
     assert response.status_code == 400
     assert response.json() == {"detail": "Você deve enviar ou um texto ou um arquivo."}
     
-# Adicione este import no topo do arquivo
-import io
-
-# ... (outros imports e o 'client = TestClient(app)')
-
-# Adicione esta nova função de teste ao arquivo
+    
 def test_classify_email_with_file_successful():
     """
     Testa o endpoint de classificação enviando um arquivo .txt.

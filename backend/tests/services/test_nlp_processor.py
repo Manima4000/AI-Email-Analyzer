@@ -1,4 +1,3 @@
-# Importa a função que queremos testar
 from app.services.nlp_processor import preprocess_text
 
 def test_preprocess_text_removes_leading_whitespace():
