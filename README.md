@@ -1,4 +1,4 @@
-# Classificador de E-mails com IA 📧✨
+# Classificador de E-mails com IA 
 
 ![Badge de Status](https://img.shields.io/badge/status-funcional-brightgreen)
 ![Badge do Python](https://img.shields.io/badge/Python-3.11+-blue.svg)
@@ -11,7 +11,7 @@
 
 ---
 
-## 📚 Tabela de Conteúdos
+## Tabela de Conteúdos
 
 * [Sobre o Projeto](#-sobre-o-projeto)
 * [Tecnologias Utilizadas](#-tecnologias-utilizadas)
@@ -29,7 +29,7 @@
 
 ---
 
-## 🎯 Sobre o Projeto
+## Sobre o Projeto
 
 Este projeto simula uma ferramenta de automação e produtividade. A aplicação permite que um usuário cole o texto de um e-mail ou faça o upload de um arquivo (`.txt`/`.pdf`) e, em segundos, receba uma análise gerada por IA sobre o conteúdo, além de uma sugestão de resposta.
 
@@ -41,9 +41,9 @@ O objetivo era construir uma aplicação full-stack completa, demonstrando boas 
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
-* **Backend:** Python, FastAPI, Uvicorn
+* **Backend:** Python, FastAPI, Uvicorn, BeautifulSoup4
 * **Inteligência Artificial:** Google Gemini Pro API
 * **Frontend:** HTML5, CSS3, JavaScript (Vanilla JS), NGINX
 * **Testes:** Pytest, pytest-asyncio
@@ -52,7 +52,7 @@ O objetivo era construir uma aplicação full-stack completa, demonstrando boas 
 
 ---
 
-## ✨ Principais Features
+## Principais Features
 
 * **Análise por IA:** Sugestão de respostas via Google Gemini.
 * **Múltiplos Formatos de Entrada:** Suporte para texto colado e upload de arquivos `.txt` e `.pdf`.
@@ -61,10 +61,11 @@ O objetivo era construir uma aplicação full-stack completa, demonstrando boas 
 * **Modelo de IA Configurável:** Permite a troca fácil do modelo Gemini via variáveis de ambiente.
 * **Execução Simplificada:** O projeto inteiro (frontend e backend) sobe com um único comando `docker-compose up`.
 * **Cobertura de Testes:** Testes de unidade e integração para garantir a robustez da API.
+* **Pré-processamento Inteligente de Texto:** Limpeza automática de tags HTML, respostas de e-mails antigos e espaços em branco para otimizar a análise da IA.
 
 ---
 
-## 🚀 Como Rodar o Projeto Localmente
+## Como Rodar o Projeto Localmente?
 
 Siga as instruções abaixo para ter o projeto rodando na sua máquina em segundos.
 
@@ -102,7 +103,7 @@ Siga as instruções abaixo para ter o projeto rodando na sua máquina em segund
 
 ---
 
-## ✅ Rodando os Testes
+## Rodando os Testes
 
 Para garantir que a lógica do backend está funcionando corretamente, você pode rodar a suíte de testes automatizados.
 
@@ -129,7 +130,7 @@ Para garantir que a lógica do backend está funcionando corretamente, você pod
 
 ---
 
-## ⚙️ Configuração Avançada
+## Configuração Avançada
 
 ### Escolhendo o Modelo de IA
 A disponibilidade dos modelos do Gemini pode variar. Incluímos um script para você verificar quais modelos sua chave de API pode acessar.
@@ -167,14 +168,14 @@ A disponibilidade dos modelos do Gemini pode variar. Incluímos um script para v
 
 ---
 
-## ☁️ Estratégia de Deploy
+## Estratégia de Deploy
 
 * **Frontend (Vercel):** O conteúdo da pasta `frontend` pode ser implantado como um "Static Site" na Vercel.
 * **Backend (Render):** O backend na pasta `backend` é containerizado e pode ser implantado como um "Web Service" na plataforma Render.
 
 ---
 
-## 🧭 Próximos Passos
+## Próximos Passos
 * [ ] Histórico de análises salvo no navegador.
 * [ ] Opção de ajustar o "tom" da resposta sugerida (Formal, Amigável, etc.).
 * [ ] CI/CD com GitHub Actions para rodar os testes automaticamente.

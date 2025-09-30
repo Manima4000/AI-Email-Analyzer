@@ -203,3 +203,113 @@ button:disabled {
     white-space: pre-wrap;
     margin-top: 0.5rem;
 }
+
+.response-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#copy-button {
+    width: auto;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    background-color: var(--border-color);
+    color: var(--label-color);
+}
+
+#copy-button:hover {
+    background-color: var(--primary-color);
+    color: var(--button-text-color);
+}
+
+
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1.25rem;
+    border-radius: 9999px; 
+    text-transform: capitalize;
+}
+
+.badge--productive {
+    background-color: transparent;
+    color: #166534; 
+    border: 1px solid #166534; 
+}
+
+.badge--unproductive {
+    background-color: #ffedd5; 
+    color: #9a3412;
+}
+
+
+.badge--error {
+    background-color: var(--danger-bg);
+    color: var(--danger-text);
+}
+
+.badge--neutral {
+    background-color: #e5e7eb; 
+    color: #4b5563; 
+}
+
+body.dark-mode .badge--unproductive {
+    background-color: #7c2d12;
+    color: #ffedd5;
+}
+
+body.dark-mode .badge--neutral {
+    background-color: #4b5563;
+    color: #e5e7eb;
+}
+
+body.dark-mode .badge--productive {
+    color: #4ade80; 
+    border-color: #4ade80;
+}
+
+#history-section {
+    margin-top: 3rem;
+    border-top: 1px solid var(--border-color);
+    padding-top: 2rem;
+}
+
+#history-section h2 {
+    text-align: center;
+    color: var(--label-color);
+    margin-bottom: 1.5rem;
+}
+
+#history-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.history-item {
+    background-color: var(--background-color);
+    border-radius: 6px;
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+    transition: box-shadow 0.2s;
+}
+
+.history-item:hover {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.history-item p {
+    margin: 0 0 0.5rem 0;
+}
+
+.history-item .response-text {
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}

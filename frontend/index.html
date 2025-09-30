@@ -48,10 +48,19 @@
                 <h2>Análise Concluída</h2>
                 <div class="result-box">
                     <p><strong>Categoria:</strong> <span id="result-category"></span></p>
-                    <p><strong>Resposta Sugerida:</strong></p>
+                    <div class="response-header">
+                        <p><strong>Resposta Sugerida:</strong></p>
+                        <button id="copy-button" title="Copiar resposta">Copiar</button>
+                    </div>
                     <div id="result-response" class="response-text"></div>
                 </div>
             </div>
+            <section id="history-section" class="hidden">
+                <h2>Histórico Recente</h2>
+                <ul id="history-list">
+                    </ul>
+                <p id="history-empty-message">Nenhuma análise no histórico ainda.</p>
+            </section>
         </main>
     </div>
 

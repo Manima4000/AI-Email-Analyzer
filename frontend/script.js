@@ -1,4 +1,3 @@
-// Seleciona os elementos do DOM
 const form = document.getElementById('email-form');
 const textInput = document.getElementById('email-text');
 const fileInput = document.getElementById('email-file');
@@ -7,8 +6,13 @@ const loadingIndicator = document.getElementById('loading-indicator');
 const resultArea = document.getElementById('result-area');
 const resultCategory = document.getElementById('result-category');
 const resultResponse = document.getElementById('result-response');
+const copyButton = document.getElementById('copy-button');
 const themeToggle = document.getElementById('theme-toggle');
 const body = document.body;
+const historySection = document.getElementById('history-section');
+const historyList = document.getElementById('history-list');
+const historyEmptyMessage = document.getElementById('history-empty-message');
+const MAX_HISTORY_ITEMS = 5; 
 
 
 function applyTheme(theme) {
@@ -33,24 +37,21 @@ themeToggle.addEventListener('change', () => {
 
 
 form.addEventListener('submit', async (event) => {
-    event.preventDefault(); // Impede o comportamento padrão do formulário
+    event.preventDefault(); 
 
     const text = textInput.value;
     const file = fileInput.files[0];
 
-    // Validação: verifica se pelo menos um campo foi preenchido
     if (!text && !file) {
         alert('Por favor, cole um texto ou selecione um arquivo.');
         return;
     }
 
-    // Validação: impede o envio de ambos os campos
     if (text && file) {
         alert('Por favor, envie apenas texto ou um arquivo, não ambos.');
         return;
     }
 
-    // Prepara os dados para envio
     const formData = new FormData();
     if (text) {
         formData.append('email_text', text);
@@ -58,7 +59,6 @@ form.addEventListener('submit', async (event) => {
         formData.append('email_file', file);
     }
 
-    // Atualiza a UI para o estado de "carregando"
     loadingIndicator.classList.remove('hidden');
     resultArea.classList.add('hidden');
     submitButton.disabled = true;
@@ -79,13 +79,13 @@ form.addEventListener('submit', async (event) => {
 
     } catch (error) {
         console.error("--- DETALHES COMPLETOS DO ERRO ---");
-        console.error("Tipo de Erro:", error.name);      // Ex: TypeError
-        console.error("Mensagem:", error.message);    // Ex: Failed to fetch
-        console.error("Objeto do Erro:", error);        // O erro completo
+        console.error("Tipo de Erro:", error.name);     
+        console.error("Mensagem:", error.message);    
+        console.error("Objeto do Erro:", error);        
         console.error("---------------------------------");
         
 
-        displayError(`Erro no JavaScript: ${error.message}. Verifique o console (F12) para detalhes técnicos.`);
+        displayError(`Erro no JavaScript: ${error.message}.`);
     
     } finally {
         loadingIndicator.classList.add('hidden');
@@ -94,15 +94,106 @@ form.addEventListener('submit', async (event) => {
 });
 
 function displayResults(data) {
+    const category = data.category.toLowerCase();
+    
     resultCategory.textContent = data.category;
+
+    resultCategory.className = ''; 
+    resultCategory.classList.add('badge');
+
+    if (category.includes('produtivo')) {
+        resultCategory.classList.add('badge--productive');
+    } else if (category.includes('improdutivo')) {
+        resultCategory.classList.add('badge--unproductive');
+    } else if (category.includes('neutro')) {
+        resultCategory.classList.add('badge--neutral');
+    } else { 
+        resultCategory.classList.add('badge--error');
+    }
+    
     resultResponse.textContent = data.suggested_response;
     resultArea.classList.remove('hidden');
+    saveToHistory(data); 
+    renderHistory();
 }
 
 function displayError(errorMessage) {
     resultCategory.textContent = 'Erro';
+
+    resultCategory.className = '';
+    resultCategory.classList.add('badge', 'badge--error');
+
     resultResponse.textContent = errorMessage;
     resultArea.classList.remove('hidden');
 }
 
+copyButton.addEventListener('click', () => {
+    const responseText = resultResponse.textContent;
+    navigator.clipboard.writeText(responseText)
+        .then(() => {
+            copyButton.textContent = 'Copiado!';
+            setTimeout(() => {
+                copyButton.textContent = 'Copiar';
+            }, 2000); 
+        })
+        .catch(err => {
+            console.error('Erro ao copiar texto: ', err);
+        });
+});
+
+function saveToHistory(analysisData) {
+    let history = JSON.parse(localStorage.getItem('emailHistory')) || [];
+
+    history.unshift(analysisData);
+
+    if (history.length > MAX_HISTORY_ITEMS) {
+        history = history.slice(0, MAX_HISTORY_ITEMS);
+    }
+    localStorage.setItem('emailHistory', JSON.stringify(history));
+}
+
+function renderHistory() {
+    const history = JSON.parse(localStorage.getItem('emailHistory')) || [];
+
+    if (history.length === 0) {
+        historySection.classList.add('hidden');
+        return;
+    }
+
+    historySection.classList.remove('hidden');
+    historyEmptyMessage.classList.add('hidden');
+    historyList.innerHTML = ''; 
+
+    history.forEach(item => {
+        const listItem = document.createElement('li');
+        listItem.className = 'history-item';
+
+        const categoryBadge = document.createElement('span');
+        categoryBadge.textContent = item.category;
+        categoryBadge.className = 'badge';
+
+        const categoryLower = item.category.toLowerCase();
+
+        if (categoryLower.includes('improdutivo')) {
+            categoryBadge.classList.add('badge--unproductive');
+        } else if (categoryLower.includes('produtivo')) {
+            categoryBadge.classList.add('badge--productive');
+        } else if (categoryLower.includes('neutro')) {
+            categoryBadge.classList.add('badge--neutral');
+        } else {
+            categoryBadge.classList.add('badge--error');
+        }
+
+        const responseDiv = document.createElement('div');
+        responseDiv.className = 'response-text';
+        responseDiv.textContent = item.suggested_response;
+
+        listItem.appendChild(categoryBadge);
+        listItem.appendChild(responseDiv);
+        
+        historyList.appendChild(listItem);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', renderHistory);
 
