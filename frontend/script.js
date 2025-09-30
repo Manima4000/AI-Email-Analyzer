@@ -64,7 +64,7 @@ form.addEventListener('submit', async (event) => {
     submitButton.disabled = true;
 
     try {
-        const response = await fetch('http://localhost:8000/api/v1/classify-email', {
+        const response = await fetch('https://ai-email-backend-awbw.onrender.com/api/v1/classify-email', {
             method: 'POST',
             body: formData,
         });
