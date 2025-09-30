@@ -6,8 +6,10 @@
 ![Badge do Docker](https://img.shields.io/badge/Docker-conteinerizado-blue)
 
 
-> Um classificador de e-mails inteligente que utiliza a API do Google Gemini para categorizar mensagens e sugerir respostas automáticas, tudo através de uma interface web limpa e moderna. O projeto é totalmente containerizado com Docker, garantindo uma execução fácil e consistente em qualquer ambiente.
+> Um classificador de e-mails inteligente que utiliza a API do Google Gemini para categorizar mensagens e sugerir respostas automáticas. O projeto é totalmente containerizado com Docker e possui uma interface web limpa e moderna.
 
+
+**🔗 Link para a Demo Ao Vivo:** `https://ai-email-frontend-nine.vercel.app/`
 
 ---
 
@@ -24,8 +26,7 @@
   * [Escolhendo o Modelo de IA](#escolhendo-o-modelo-de-ia)
   * [Rodando Manualmente (Sem Docker)](#rodando-manualmente-sem-docker)
 * [Estratégia de Deploy](#-estratégia-de-deploy)
-* [Próximos Passos](#-próximos-passos)
-* [Contato](#-contato)
+
 
 ---
 
@@ -56,50 +57,83 @@ O objetivo era construir uma aplicação full-stack completa, demonstrando boas 
 
 * **Análise por IA:** Sugestão de respostas via Google Gemini.
 * **Múltiplos Formatos de Entrada:** Suporte para texto colado e upload de arquivos `.txt` e `.pdf`.
+* **Pré-processamento Inteligente de Texto:** Limpeza automática de tags HTML e respostas de e-mails antigos.
 * **Interface Reativa:** Feedback visual de "carregando" durante o processamento.
 * **Tema Claro e Escuro (Dark Mode):** Com persistência da escolha do usuário.
-* **Modelo de IA Configurável:** Permite a troca fácil do modelo Gemini via variáveis de ambiente.
+* **Modelo de IA Configurável:** Permite a troca fácil do modelo Gemini.
 * **Execução Simplificada:** O projeto inteiro (frontend e backend) sobe com um único comando `docker-compose up`.
 * **Cobertura de Testes:** Testes de unidade e integração para garantir a robustez da API.
-* **Pré-processamento Inteligente de Texto:** Limpeza automática de tags HTML, respostas de e-mails antigos e espaços em branco para otimizar a análise da IA.
 
 ---
 
-## Como Rodar o Projeto Localmente?
+## 🚀 Como Rodar o Projeto Localmente
 
-Siga as instruções abaixo para ter o projeto rodando na sua máquina em segundos.
+Siga os passos abaixo para configurar e executar a aplicação completa em seu ambiente de desenvolvimento local.
 
 ### Pré-requisitos
 * [Git](https://git-scm.com/)
+* [Python 3.11+](https://www.python.org/)
 * [Docker](https://www.docker.com/products/docker-desktop/) e [Docker Compose](https://docs.docker.com/compose/install/)
 
-### Instruções (Docker)
+### Passo 1: Clone o Repositório
+```bash
+git clone [https://github.com/Manima4000/AI-Email-Analyzer.git](https://github.com/Manima4000/AI-Email-Analyzer.git)
+cd AI-Email-Analyzer
+```
 
-1.  **Clone o repositório:**
-    ```bash
-    git clone [https://github.com/Manima4000/AI-Email-Analyzer.git](https://github.com/Manima4000/AI-Email-Analyzer.git)
-    cd AI-Email-Analyzer
+### Passo 2: Configure o Backend
+Crie o arquivo de variáveis de ambiente para o backend.
+
+* Na pasta `backend`, crie uma cópia do arquivo `.env.example` e renomeie-a para `.env`.
+* Abra o arquivo `.env` e preencha as variáveis:
+    ```env
+    GOOGLE_API_KEY="SUA_CHAVE_API_AQUI"
+    MODEL_NAME="gemini-pro"
     ```
 
-2.  **Configure suas variáveis de ambiente:**
-    * Na pasta `backend`, crie uma cópia do arquivo `.env.example` e renomeie-a para `.env`.
-    * Abra o arquivo `.env` e preencha as variáveis:
-        ```env
-        GOOGLE_API_KEY="SUA_CHAVE_API_AQUI"
+### Passo 3: Configure o Frontend para o Ambiente Local
+O código no repositório está configurado para usar a API em produção. Para desenvolvimento local, você precisa apontar o frontend para o seu backend local.
 
-        MODEL_NAME="gemini-pro" #Pode escolher o modelo de sua preferência
-        ```
+* Abra o arquivo `frontend/script.js`.
+* Encontre a linha que define a URL da API.
+* Comente a linha da URL de produção e descomente a linha da URL local:
+    ```javascript
+    // const apiUrl = '[https://ai-email-backend-awbw.onrender.com//api/v1/classify-email](https://ai-email-backend-awbw.onrender.com//api/v1/classify-email)'; // <-- URL de Produção
+    const apiUrl = '[http://127.0.0.1:8000/api/v1/classify-email](http://127.0.0.1:8000/api/v1/classify-email)'; // <-- URL Local para Desenvolvimento
+    ```
 
-3.  **Suba os containers com Docker Compose:**
-    * Na **pasta raiz do projeto**, execute:
+### Passo 4: Execute a Aplicação (Docker ou Manual)
+
+#### Método A: Docker (Recomendado)
+Com o Docker, você sobe o frontend e o backend com um único comando.
+
+1.  Verifique se o Docker Desktop está rodando.
+2.  Na **pasta raiz do projeto**, execute:
     ```bash
     docker-compose up --build
     ```
-    * O Docker irá construir a imagem do backend, baixar a do frontend e iniciar os dois serviços.
+3.  Acesse a aplicação:
+    * **Frontend:** **`http://localhost:5500`**
+    * **Backend Docs:** **`http://localhost:8000/docs`**
 
-4.  **Acesse a aplicação:**
-    * **Frontend:** Abra seu navegador e acesse **`http://localhost:5500`**.
-    * **Backend API Docs:** A documentação interativa da API estará disponível em **`http://localhost:8000/docs`**.
+#### Método B: Manualmente
+Execute o backend e o frontend em terminais separados.
+
+1.  **Terminal 1 (Backend):**
+    ```bash
+    cd backend
+    python -m venv .venv
+    # Windows: .\.venv\Scripts\activate | macOS/Linux: source .venv/bin/activate
+    pip install -r requirements.txt
+    uvicorn app.main:app --reload
+    ```
+
+2.  **Terminal 2 (Frontend):**
+    ```bash
+    cd frontend
+    python -m http.server 5500
+    ```
+3.  Acesse o frontend em **`http://localhost:5500`**.
 
 ---
 
