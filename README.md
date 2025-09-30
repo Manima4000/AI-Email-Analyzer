@@ -175,9 +175,3 @@ A disponibilidade dos modelos do Gemini pode variar. Incluímos um script para v
 
 ---
 
-## Próximos Passos
-* [ ] Histórico de análises salvo no navegador.
-* [ ] Opção de ajustar o "tom" da resposta sugerida (Formal, Amigável, etc.).
-* [ ] CI/CD com GitHub Actions para rodar os testes automaticamente.
-
----
